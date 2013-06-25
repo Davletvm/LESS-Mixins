@@ -1,0 +1,370 @@
+//**
+//
+// LESS mixins by Dziudek
+//
+// v.1.0 
+//
+//**
+ 
+//******************************************
+//
+// Animations
+//
+//******************************************
+ 
+// 
+// Transition mixins for properties with vendor prefixes
+//
+ 
+// version for the properties which needs vendor prefixes i.e. transform
+.transition(@property; @rest) {
+  -webkit-transition: ~'-webkit-@{property}' @rest;
+     -moz-transition:    ~'-moz-@{property}' @rest;
+       -o-transition:      ~'-o-@{property}' @rest;
+          transition:              @property @rest;
+}
+ 
+.transition(@value) {
+  -webkit-transition: @value;
+     -moz-transition: @value;
+       -o-transition: @value;
+          transition: @value;
+}
+ 
+.transition-delay(@value) {
+  -webkit-transition-delay: @value;
+     -moz-transition-delay: @value;
+       -o-transition-delay: @value;
+          transition-delay: @value;
+}
+ 
+.transition-duration(@value) {
+  -webkit-transition-duration: @value;
+     -moz-transition-duration: @value;
+       -o-transition-duration: @value;
+          transition-duration: @value;
+}
+ 
+.transition-property(@value) {
+  -webkit-transition-property: @value;
+     -moz-transition-property: @value;
+       -o-transition-property: @value;
+          transition-property: @value;
+}
+ 
+.transition-timing-function(@value) {
+  -webkit-transition-timing-function: @value;
+     -moz-transition-timing-function: @value;
+       -o-transition-timing-function: @value;
+          transition-timing-function: @value;
+}
+ 
+//
+// Transition - aliases
+//
+.trans(@value) {
+  .transition(@value);
+}
+ 
+.trans-time(@value) {
+  .transition-duration(@value);
+}
+ 
+.trans-prop(@value) {
+  .transition-property(@value);
+}
+ 
+.trans-timing(@value) {
+	.transition-timing-function(@value);
+}
+ 
+//
+// Animations
+//
+ 
+.animation(@value) {
+  -webkit-animation: @value;
+     -moz-animation: @value;
+       -o-animation: @value;
+          animation: @value;
+}
+ 
+.animation-name(@value) {
+  -webkit-animation-name: @value;
+  -moz-animation-name: @value;
+  -o-animation-name: @value;
+  animation-name: @value;
+}
+ 
+.animation-timing-function(@value) {
+  -webkit-animation-timing-function: @value;
+  -moz-animation-timing-function: @value;
+  -o-animation-timing-function: @value;
+  animation-timing-function: @value;
+}
+ 
+.animation-duration(@value) {
+  -webkit-animation-duration: @value;
+  -moz-animation-duration: @value;
+  -o-animation-duration: @value;
+  animation-duration: @value;
+}
+ 
+.animation-delay(@value) {
+  -webkit-animation-delay: @value;
+  -moz-animation-delay: @value;
+  -o-animation-delay: @value;
+  animation-delay: @value;
+}
+ 
+.animation-direction(@value) {
+  -webkit-animation-direction: @value;
+  -moz-animation-direction: @value;
+  -o-animation-direction: @value;
+  animation-direction: @value;
+}
+ 
+.animation-iteration-count(@value) {
+  -webkit-animation-iteration-count: @value;
+  -moz-animation-iteration-count: @value;
+  -o-animation-iteration-count: @value;
+  animation-iteration-count: @value;
+}
+ 
+//
+// Animations - aliases
+//
+ 
+.anim(@value) {
+  .animation(@value);
+}
+ 
+.anim-name(@value) {
+  .anim-name(@value);
+}
+ 
+.anim-timing(@value) {
+  .animation-timing-function(@value);
+}
+ 
+.anim-time(@value) {
+  .animation-duration(@value);
+}
+ 
+.anim-delay(@value) {
+  .animation-delay(@value);
+}
+ 
+.anim-dir(@value) {
+  .animation-direction(@value);
+}
+ 
+.anim-count(@value) {
+  .animation-iteration-count(@value);
+}
+ 
+//******************************************
+//
+// Typography
+//
+//******************************************
+ 
+// @font-face mixin
+.font-face(@family; @path; @style: normal; @weight: 400; @stretch: normal) {
+  @font-face {
+    font-family: @family;
+  	src: url(~'@{path}.eot');
+  	src: url(~'@{path}.eot?#iefix') format('embedded-opentype'), 
+         url(~'@{path}.woff') format('woff'), 
+         url(~'@{path}.ttf') format('truetype'), 
+         url(~'@{path}.svg') format('svg');
+    font-stretch: @stretch;
+  	font-style: @style;
+    font-weight: @weight;
+  }
+}
+ 
+// font-size mixin - alternative for rem units
+.font-size(@size; @base: 10px) {
+	font-size: ceil(@size * @base);
+}
+ 
+// font-size mixin with rem unit support - the base should be changed to your base size
+.rem(@size; @base: 10px) {
+	font-size: ceil(@size * @base);
+	font-size: ~"@{size}rem";
+}
+ 
+//******************************************
+//
+// Colors
+//
+//******************************************
+ 
+// Background RGBa with fallback (rgb for IE)
+.rgba(@color; @alpha) {
+  @r: red(@color);
+  @g: green(@color);
+  @b: blue(@color);
+  background-color: @color;
+  background-color: ~"rgba(@{r}, @{g}, @{b}, @{alpha})";
+}
+ 
+// Background RGBa with fallback (rgb for IE)
+.color(@color; @alpha) {
+  @r: red(@color);
+  @g: green(@color);
+  @b: blue(@color);
+  color: @color;
+  color: ~"rgba(@{r}, @{g}, @{b}, @{alpha})";
+}
+ 
+// Opacity property with IE fallback
+.opacity(@value) {
+  @ie: ceil(@value * 100);
+  filter: ~"alpha(opacity=@{ie})";
+  opacity: @value;
+}
+ 
+// Gradients
+// @TODO
+ 
+//******************************************
+//
+// Boxes
+//
+//******************************************
+ 
+// box-shadow mixin - use ~"value" to put more than one box-shadow values
+.box-shadow(@value) {
+  -webkit-box-shadow: @value;
+     -moz-box-shadow: @value;
+  	      box-shadow: @value;
+}
+ 
+// inner box-shadow
+.inner-shadow(@value) {
+	-webkit-box-shadow: inset @value;
+	   -moz-box-shadow: inset @value;
+		    box-shadow: inset @value;	
+}
+ 
+// border-radius mixin - use ~"value" to use 10px/20px syntax
+.border-radius(@value) {
+  -webkit-border-radius: @value;
+     -moz-border-radius: @value;
+  	      border-radius: @value;
+}
+ 
+// box-sizing mixin
+.box-sizing(@value) {
+  -webkit-box-sizing: @value;
+     -moz-box-sizing: @value;
+  	      box-sizing: @value;
+}
+ 
+//*****************************************
+//
+// 3D
+//
+//*****************************************
+ 
+// Perspective
+.perspective(@value) {
+  -webkit-perspective: @value;
+     -moz-perspective: @value;
+      -ms-perspective: @value;
+          perspective: @value;
+}
+ 
+// Transforms
+.transform(@value) {
+  -webkit-transform: @value;
+     -moz-transform: @value;
+      -ms-transform: @value;
+       -o-transform: @value;
+          transform: @value;
+}
+ 
+.transform-origin(@value) {
+  -webkit-transform-origin: @value;
+     -moz-transform-origin: @value;
+      -ms-transform-origin: @value;
+       -o-transform-origin: @value;
+          transform-origin: @value;
+}
+ 
+.transform-style(@value) {
+  -webkit-transform-style: @value;
+     -moz-transform-style: @value;
+      -ms-transform-style: @value;
+          transform-style: @value;
+}
+ 
+.backface(@value) {
+  -webkit-backface-visibility: @value;
+     -moz-backface-visibility: @value;
+      -ms-backface-visibility: @value;
+          backface-visibility: @value;
+}
+ 
+//******************************************
+//
+// UI
+//
+//******************************************
+ 
+// placeholder
+.placeholder-props {
+  // Your placeholder properties goes here
+}
+ 
+.placeholder(@selector) {
+  @{selector}::-webkit-input-placeholder { 
+    .placeholder-props;
+  }
+  @{selector}::-moz-placeholder { 
+    .placeholder-props; 
+  }
+  @{selector}:-ms-input-placeholder { 
+    .placeholder-props;
+  }
+  @{selector}:-moz-placeholder { 
+    .placeholder-props;
+  }
+}
+ 
+// user select
+.user-select(@value) {
+  -webkit-user-select: @value;
+     -moz-user-select: @value;
+      -ms-user-select: @value;
+          user-select: @value;
+}
+ 
+// selection design
+.selection-props {
+  // Your selection properties goes here
+}
+ 
+.selection(@selector) {
+  @{selector}::selection { 
+    .selection-props;
+  }
+  @{selector}::-moz-selection { 
+    .selection-props; 
+  }
+}
+ 
+.selection(@selector; @bg; @color) {
+  @{selector}::selection { 
+    background: @bg;
+    color: @color;
+  }
+  @{selector}::-moz-selection { 
+    background: @bg;
+    color: @color;
+  }
+}
+ 
+// EOF
